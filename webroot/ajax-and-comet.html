@@ -12,19 +12,50 @@
 
       
 
-      <div class="container"><div class="row"><section><h4>LazyLoad Example</h4><p>Assume the calculation inside TestSlowLoad will take some time:</p><code><pre>(register-lift-snippet
- &quot;TestSlowLoad&quot;
- [node req page-id lift-instr]
- (Thread/sleep 10000)
- (-&gt; node 
-     (assoc :content [&quot;Lazy Load finished!&quot;])
-     (assoc-in [:attrs :class] &quot;alert alert-success&quot;)
-     )
+      <div class="container"><div class="row"><section><h4>Ajax form and Comet example</h4><p>The &quot;Ajax form&quot; in closerve is in fact implemented with websocket, but we keep the lift:form.ajax tag to have better prtability of HTML code.</p><p>Here is an example of using form.ajax and comet to make a very simple chat app.</p><p>First, define some data structures for bookkeeping:</p><code><pre>(def chat-chans (atom #{}))
+(def chat-msgs (atom []))
+</pre></code><p>Then we need a processing fuction for ajax.form which takes user input:</p><code><pre>(register-cmd-proc-fn 
+ &quot;ChatInput&quot;
+ [context cmd]
+ (let [chat-msg (cmd &quot;chatmsg&quot;)]
+   (if (string? chat-msg)     
+     (do 
+       (swap! chat-msgs #(apply vector (take 10 (conj %1 %2))) chat-msg)
+       (send-cmd-to-page (:page-id context) 
+                         {:act :reset 
+                          :selector 
+                          (str &quot;#&quot; (:form-id context))})
+       )       
+     ))
  )
-</pre></code><p>Wrap the long loading snippet with a lift:LazyLoad snippet:</p><code><pre>&lt;span class=&quot;lift:LazyLoad&quot;&gt;
-  &lt;:span class=&quot;lift:TestSlowLoad&quot;&gt;&gt;
-&lt;/span&gt;
-</pre></code><div><p>Result:</p><div class="well"><ul class="lift:comet?type=chat" id="msglist"></ul><form class="lift:form.ajax?callback=ChatInput"><input type="text" name="chatmsg" placeholder=""><input type="submit"></form></div></div></section></div></div>
+
+</pre></code><p>Distribute the input msg to all comet channels, kind of like the comet actor server in Lift:</p><code><pre>(add-watch chat-msgs :watch-chat-msgs
+           (fn [key aref old-val new-val]
+             (if new-val 
+               (doseq [c @chat-chans]
+                 (go (&gt;! c (last new-val)))))))
+</pre></code><p>Now the comet actor which read input from its channel and send update to browser:</p><code><pre>(register-comet-fn
+ &quot;chat&quot;
+ [ch req page-id uuid]
+ (swap! chat-chans conj ch)
+ (loop [msg (<!-- ch)]
+   (when msg 
+     (send-cmd-to-page page-id 
+                       {:act :append
+                        :selector "#msglist"
+                        :html (hickory-to-html {:type :element, :attrs nil
+                                                :tag :li :content [msg]}) })
+     (recur (<! ch))))
+ (prn "chat channel is closed")
+ (swap! chat-chans disj ch)
+)
+--></pre></code><p>The corresponding HTML code:</p><code><pre>&lt;ul class=&quot;lift:comet?type=chat&quot;&gt;
+&lt;/ul&gt;
+&lt;form class=&quot;lift:form.ajax?callback=ChatInput&quot;&gt;
+&lt;input type=&quot;text&quot; name=&quot;chatmsg&quot;&gt;
+&lt;input type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+</pre></code><div><p>Try it here:</p><div class="well"><ul class="lift:comet?type=chat" id="msglist"></ul><form class="lift:form.ajax?callback=ChatInput"><input type="text" name="chatmsg" placeholder=""><input type="submit"></form></div></div></section></div></div>
 
 
       <!-- Example row of columns -->
