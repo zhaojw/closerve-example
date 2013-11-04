@@ -5,7 +5,7 @@ Example about using closerve, a view first web framework in Clojure inspired by
 [Lift web framework](http://liftweb.net)
 
 Just like the Django mark up language is used by many non-python web frameworks, 
-since Lift is the de Facto standard for view first framework, Closerve try to mark  
+since Lift is the de Facto standard for view first framework, Closerve try to mark
 HTML using the same “lift:” identifier. This will provide some reusablility of HTML files. 
 
 Including how to use lift:surround, lift:embed, lift:LazyLoad, lift:form.ajax, lift.comet.
