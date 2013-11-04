@@ -38,18 +38,18 @@
  &quot;chat&quot;
  [ch req page-id uuid]
  (swap! chat-chans conj ch)
- (loop [msg (<!-- ch)]
+ (loop [msg (&lt;! ch)]
    (when msg 
      (send-cmd-to-page page-id 
                        {:act :append
-                        :selector "#msglist"
+                        :selector &quot;#msglist&quot;
                         :html (hickory-to-html {:type :element, :attrs nil
                                                 :tag :li :content [msg]}) })
-     (recur (<! ch))))
- (prn "chat channel is closed")
+     (recur (&lt;! ch))))
+ (prn &quot;chat channel is closed&quot;)
  (swap! chat-chans disj ch)
 )
---></pre></code><p>The corresponding HTML code:</p><code><pre>&lt;ul class=&quot;lift:comet?type=chat&quot;&gt;
+</pre></code><p>The corresponding HTML code:</p><code><pre>&lt;ul class=&quot;lift:comet?type=chat&quot;&gt;
 &lt;/ul&gt;
 &lt;form class=&quot;lift:form.ajax?callback=ChatInput&quot;&gt;
 &lt;input type=&quot;text&quot; name=&quot;chatmsg&quot;&gt;
