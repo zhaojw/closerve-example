@@ -8,7 +8,9 @@ Just like the Django mark up language is used by many non-python web frameworks,
 since Lift is the de Facto standard for view first framework, Closerve try to mark
 HTML using the same “lift:” identifier. This will provide some reusablility of HTML files. 
 
-Including how to use lift:surround, lift:embed, lift:LazyLoad, lift:form.ajax, lift.comet.
+This example included how to use lift:surround, lift:embed, lift:LazyLoad, lift:form.ajax, lift.comet,
+which are currently implemented in CloServe. The other features of Lift like screen, wizard, wiring, 
+proto user, etc are not implemented yet.
 
 Though the names are similar to Lift, there are differences here and there. For the form.ajax
 case, one parameter "callback" need to be given, which corresponds to a piece of code that defind
