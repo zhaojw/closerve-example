@@ -39,7 +39,6 @@
 
 (add-watch chat-msgs :watch-chat-msgs
            (fn [key aref old-val new-val]
-             (prn "new chat message:" (last new-val))
              (if new-val 
                (doseq [c @chat-chans]
                  (go (>! c (last new-val)))))))
@@ -50,7 +49,6 @@
  (swap! chat-chans conj ch)
  (loop [msg (<! ch)]
    (when msg 
-     (prn "Ok, got msg")
      (send-cmd-to-page page-id 
                        {:act :append
                         :selector "#msglist"
