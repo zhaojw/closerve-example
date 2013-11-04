@@ -24,7 +24,7 @@
 </pre></code><p>Wrap the long loading snippet with a lift:LazyLoad snippet:</p><code><pre>&lt;span class=&quot;lift:LazyLoad&quot;&gt;
   &lt;:span class=&quot;lift:TestSlowLoad&quot;&gt;&gt;
 &lt;/span&gt;
-</pre></code><div><p>Result:</p><div class="well"><form class="lift:form.ajax?callback=ChatInput"><input type="text" name="chatmsg" placeholder=""><input type="submit"></form></div></div></section></div></div>
+</pre></code><div><p>Result:</p><div class="well"><ul class="lift:comet?type=chat" id="msglist"></ul><form class="lift:form.ajax?callback=ChatInput"><input type="text" name="chatmsg" placeholder=""><input type="submit"></form></div></div></section></div></div>
 
 
       <!-- Example row of columns -->

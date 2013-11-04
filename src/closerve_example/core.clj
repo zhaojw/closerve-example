@@ -1,8 +1,11 @@
 (ns closerve-example.core
   (:require [ring.util.response :as response]
             [ring.middleware.params :as params]
-            [ring.util.response :as response])
-  (:use [closerve state wscmd server])
+            [ring.util.response :as response]
+            [clojure.core.async :refer [go close! >!! <! >! sliding-buffer chan]]
+            )
+  (:use [closerve state wscmd server]
+        [hickory render])
   (:gen-class))
 
 
@@ -36,7 +39,10 @@
 
 (add-watch chat-msgs :watch-chat-msgs
            (fn [key aref old-val new-val]
-             (prn "new chat message:" (last new-val))))
+             (prn "new chat message:" (last new-val))
+             (if new-val 
+               (doseq [c @chat-chans]
+                 (go (>! c (last new-val)))))))
 
 (register-comet-fn
  "chat"
@@ -45,6 +51,11 @@
  (loop [msg (<! ch)]
    (when msg 
      (prn "Ok, got msg")
+     (send-cmd-to-page page-id 
+                       {:act :append
+                        :selector "#msglist"
+                        :html (hickory-to-html {:type :element, :attrs nil
+                                                :tag :li :content [msg]}) })
      (recur (<! ch))))
  (prn "chat channel is closed")
  (swap! chat-chans disj ch)
