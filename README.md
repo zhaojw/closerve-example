@@ -1,7 +1,7 @@
 closerve-example
 ================
 
-Example about using closerve, a view first web framework in Clojure inspired by
+Example about using CloServe, a view first web framework in Clojure inspired by
 [Lift web framework](http://liftweb.net)
 
 Just like the Django mark up language is used by many non-python web frameworks, 
