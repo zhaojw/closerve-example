@@ -28,7 +28,8 @@
  (let [chat-msg (cmd "chatmsg")]
    (if (string? chat-msg)     
      (do 
-       (swap! chat-msgs #(apply vector (take 10 (conj %1 %2))) chat-msg)
+       (swap! chat-msgs #(apply vector (drop (- (count %1) 9)
+                                             (conj %1 %2))) chat-msg)
        (send-cmd-to-page (:page-id context) 
                          {:act :reset 
                           :selector 
