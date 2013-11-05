@@ -64,3 +64,7 @@ parameter.
 Copyright © 2013 Jiawei Zhao, MKRRF IT Limited
 
 Distributed under the Eclipse Public License, the same as Clojure.
+
+The files that are marked as from third party (for eg, the css, js files under webroot/static from bootstrap
+and jquery) belongs to the corresponding third party and their own corresponding license.
+
