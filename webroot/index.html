@@ -1,6 +1,4 @@
-<!DOCTYPE html><html lang="en">
-
-  <body class="lift:content_id=main">
+<!DOCTYPE html><html lang="en"><head></head><body class="lift:content_id=main">
 
     <div id="main" class="lift:surround?with=default;at=content">
 
@@ -14,19 +12,19 @@
 
       
 
-      <div class="container"><div class="row"><section><h4>LazyLoad Example</h4><p>Assume the calculation inside TestSlowLoad will take some time:</p><code><pre>(register-lift-snippet
+      <div class="container"><div class="row"><section><h4>LazyLoad Example</h4><p>Assume the calculation inside TestSlowLoad will take some time:</p><pre><code>(register-lift-snippet
  &quot;TestSlowLoad&quot;
  [node req page-id lift-instr]
- (Thread/sleep 10000)
+ (Thread/sleep 5000)
  (-&gt; node 
      (assoc :content [&quot;Lazy Load finished!&quot;])
      (assoc-in [:attrs :class] &quot;alert alert-success&quot;)
      )
  )
-</pre></code><p>Wrap the long loading snippet with a lift:LazyLoad snippet:</p><code><pre>&lt;span class=&quot;lift:LazyLoad&quot;&gt;
+</code></pre><p>Wrap the long loading snippet with a lift:LazyLoad snippet:</p><pre><code>&lt;span class=&quot;lift:LazyLoad&quot;&gt;
   &lt;:span class=&quot;lift:TestSlowLoad&quot;&gt;&gt;
 &lt;/span&gt;
-</pre></code><div><p>Result:</p><div class="well"><span class="lift:LazyLoad"><span class="lift:TestSlowLoad"></span></span></div></div></section></div></div>
+</code></pre><div><p>Result:</p><div class="well"><span class="lift:LazyLoad"><span class="lift:TestSlowLoad"></span></span></div></div></section></div></div>
 
 
       <!-- Example row of columns -->
