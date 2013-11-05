@@ -22,7 +22,7 @@ Contrubution by:
 - [MKRRF IT Limited](http://www.mkrrf-it.com), provided some of the code used in [CloEDIT](http://www.mkrrf-it.com/cloedit/)
 
 ###Usage
-Live web-page is running here: [closerve](http://closerve.mkrrf-it.com/)
+Live web-page is running here: [CloServe LazyLoad](http://closerve.mkrrf-it.com/lazyload)
 
 ###Installation
 First, you need the [closerve snapshot](https://github.com/zhaojw/closerve) from github,
