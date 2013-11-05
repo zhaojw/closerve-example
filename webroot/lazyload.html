@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"><head></head><body class="lift:content_id=main">
+
+    <div id="main" class="lift:surround?with=default;at=content">
+
+      
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>LazyLoad</title>
+
+      
+
+      <div class="container"><div class="row"><section><h4>LazyLoad Example</h4><p>Assume the calculation inside TestSlowLoad will take some time:</p><pre><code>(register-lift-snippet
+ &quot;TestSlowLoad&quot;
+ [node req page-id lift-instr]
+ (Thread/sleep 5000)
+ (-&gt; node 
+     (assoc :content [&quot;Lazy Load finished!&quot;])
+     (assoc-in [:attrs :class] &quot;alert alert-success&quot;)
+     )
+ )
+</code></pre><p>Wrap the long loading snippet with a lift:LazyLoad snippet:</p><pre><code>&lt;span class=&quot;lift:LazyLoad&quot;&gt;
+  &lt;:span class=&quot;lift:TestSlowLoad&quot;&gt;&gt;
+&lt;/span&gt;
+</code></pre><div><p>Result:</p><div class="well"><span class="lift:LazyLoad"><span class="lift:TestSlowLoad"></span></span></div></div></section></div></div>
+
+
+      <!-- Example row of columns -->
+     
+
+  
+
+  
+</div></body></html>

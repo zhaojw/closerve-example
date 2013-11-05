@@ -8,23 +8,14 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>LazyLoad</title>
+	<title>About CloServe</title>
 
       
 
-      <div class="container"><div class="row"><section><h4>LazyLoad Example</h4><p>Assume the calculation inside TestSlowLoad will take some time:</p><pre><code>(register-lift-snippet
- &quot;TestSlowLoad&quot;
- [node req page-id lift-instr]
- (Thread/sleep 5000)
- (-&gt; node 
-     (assoc :content [&quot;Lazy Load finished!&quot;])
-     (assoc-in [:attrs :class] &quot;alert alert-success&quot;)
-     )
- )
-</code></pre><p>Wrap the long loading snippet with a lift:LazyLoad snippet:</p><pre><code>&lt;span class=&quot;lift:LazyLoad&quot;&gt;
-  &lt;:span class=&quot;lift:TestSlowLoad&quot;&gt;&gt;
-&lt;/span&gt;
-</code></pre><div><p>Result:</p><div class="well"><span class="lift:LazyLoad"><span class="lift:TestSlowLoad"></span></span></div></div></section></div></div>
+      <div class="container"><div class="row"><section><h4>About CloServe</h4><p>Closerve is a view first web framework in <a href="http://clojure.org">Clojure </a>. It is inspired by the excellent <a href="http://http://liftweb.net"> Lift framework </a>, which is in <a href="http://www.scala-lang.org/"> Scala language </a>.</p><p>View first web framework especially as implement in Lift, provide a very clean seperation of web design and backend development. Lift also provides a lot very helpful techs to make ajax form, comet, long polling, parallel load easy to implement with it. Check out the
+<a href="http://simply.liftweb.net/"> Simply LIft </a>
+ and <a href="http://seventhings.liftweb.net/"> Seven things </a> websites. </p><p>CloServe currently implemnts some of the features available in LIft: snippet, surround, embed, ajax form, long poll, comet. They do not work exactly the same as Lift though. For eg, in CloServe, ajax form, long pull, comet are using websocket.</p><p>Just like the mark up language of <a href="https://www.djangoproject.com/">Django</a> is used by many non-django web frameworks, since Lift is the de Facto standard for view first framework, Closerve mark the HTML using the same “lift:” identifier. This will provide some reusablility of HTML files. </p><p>Currently Closerve is still in very beginning stage, the code are not well organized or optimized. There could also be security bugs. Neverless it is working and we run our website on it.</p><em>Welcome to join the development at: <a href="https://github.com/zhaojw/closerve">CloServe Github Page </a>  and discuss topics about it at 
+<a href="https://groups.google.com/forum/#!forum/closerve">google closerve group </a>.</em></section></div></div>
 
 
       <!-- Example row of columns -->

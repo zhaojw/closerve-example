@@ -60,6 +60,13 @@
  (swap! chat-chans disj ch)
 )
 
+;;;rest example
+
+(register-dyna-action 
+ #"^/sum/([\d]+)/([\d]+)$"
+ [req op1 op2] 
+ (response/response (str "sum = " (+ (Long. op1) (+ (Long. op2 ))))))
+
 
 ;;;"no .html here"
 (reset! access-rules
