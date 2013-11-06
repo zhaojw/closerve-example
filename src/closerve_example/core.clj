@@ -19,6 +19,15 @@
      )
  )
 
+
+(register-lift-snippet
+ "ActiveIfIsMkrrf"
+ [node req page-id lift-instr]
+ (if (and (:server-name req) 
+          (re-matches #"^.*mkrrf-it.com$" (:server-name req)))
+   node "")
+ )
+
 (def chat-chans (atom #{}))
 (def chat-msgs (atom []))
 
