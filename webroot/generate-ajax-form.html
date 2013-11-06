@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head></head><body class="lift:content_id=main">
+
+    <div id="main" class="lift:surround?with=default;at=content">
+
+      
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Generate Ajax Form with Code Snippet</title>
+
+      
+
+      <div class="container"><div class="row"><section><h4>Generate Ajax Form with Snippet Example</h4><p>In some application scenerios, one need to generate Ajax form dynamically in response of user action, for eg, user accepted some chat invitation. In this case, we can use form.ajax callback to generate and send another ajax form to the browser, as demonstrated in this example.</p><p>Here is the form.ajax call back function that generate another ajax form:</p><pre><code>(register-cmd-proc-fn 
+ &quot;ChatConfirm&quot;
+ [context cmd]
+ (let [chatform {:type :element :tag :form
+                 :attrs {:class &quot;input-group lift:form.ajax?callback=ChatInput&quot;}
+                 :content [{:type :element :tag :input
+                            :attrs {:type &quot;text&quot; :name &quot;chatmsg&quot; :class &quot;form-control&quot;}}
+                           {:type :element :tag :span
+                            :attrs {:class &quot;input-group-btn&quot;}
+                            :content [{:type :element :tag :input
+                                       :attrs {:value &quot;GO!&quot; :class &quot;btn btn-default&quot; :type &quot;submit&quot;}}]}]}
+       newnode (process-snippets chatform (:req context) (:page-id context))
+       htmltxt (hickory-to-html newnode)]
+   (send-cmd-to-page (:page-id context)
+                     {:act :replaceWith
+                      :selector (str &quot;#&quot; (:form-id context))
+                      :html htmltxt
+                      }))
+ )
+</code></pre><p>The corresponding HTML code:</p><pre><code>&lt;ul class=&quot;lift:comet?type=chat&quot;&gt;
+&lt;/ul&gt;
+&lt;form class=&quot;lift:form.ajax?callback=ChatConfirm&quot;&gt;
+&lt;input type=&quot;hide&quot; name=&quot;ppp&quot;&gt;
+&lt;input value=&quot;Join Chat!&quot; type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+</code></pre><div><p>Try it here:</p><div class="well"><ul class="lift:comet?type=chat" id="msglist"></ul><span><form class="input-group lift:form.ajax?callback=ChatConfirm">
+<input name="ppp" type="hidden" class="">
+      <span class="input-group-btn">
+        <input value="Join Chat!" class="btn btn-default" type="submit">
+      </span>
+</form></span></div></div></section></div></div>
+
+
+      <!-- Example row of columns -->
+     
+
+  
+
+  
+</div></body></html>

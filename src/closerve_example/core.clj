@@ -4,7 +4,7 @@
             [ring.util.response :as response]
             [clojure.core.async :refer [go close! >!! <! >! sliding-buffer chan]]
             )
-  (:use [closerve state wscmd server]
+  (:use [closerve state wscmd server liftutil]
         [hickory render])
   (:gen-class))
 
@@ -37,6 +37,28 @@
        )       
      ))
  )
+
+
+(register-cmd-proc-fn 
+ "ChatConfirm"
+ [context cmd]
+ (let [chatform {:type :element :tag :form
+                 :attrs {:class "input-group lift:form.ajax?callback=ChatInput"}
+                 :content [{:type :element :tag :input
+                            :attrs {:type "text" :name "chatmsg" :class "form-control"}}
+                           {:type :element :tag :span
+                            :attrs {:class "input-group-btn"}
+                            :content [{:type :element :tag :input
+                                       :attrs {:value "GO!" :class "btn btn-default" :type "submit"}}]}]}
+       newnode (process-snippets chatform (:req context) (:page-id context))
+       htmltxt (hickory-to-html newnode)]
+   (send-cmd-to-page (:page-id context)
+                     {:act :replaceWith
+                      :selector (str "#" (:form-id context))
+                      :html htmltxt
+                      }))
+ )
+
 
 (add-watch chat-msgs :watch-chat-msgs
            (fn [key aref old-val new-val]
