@@ -12,7 +12,7 @@
 
       
 
-      <div class="container"><div class="row"><section><h4>LazyLoad Example</h4><p>Assume the calculation inside TestSlowLoad will take some time:</p><pre><code>(register-lift-snippet
+      <div class="container"><div class="row"><section><h4>LazyLoad Example</h4><p>Assume the calculation inside TestSlowLoad will take some time:</p><pre class="prettyprint lang-clojure"><code>(register-lift-snippet
  &quot;TestSlowLoad&quot;
  [node req page-id lift-instr]
  (Thread/sleep 5000)
@@ -21,7 +21,7 @@
      (assoc-in [:attrs :class] &quot;alert alert-success&quot;)
      )
  )
-</code></pre><p>Wrap the long loading snippet with a lift:LazyLoad snippet:</p><pre><code>&lt;span class=&quot;lift:LazyLoad&quot;&gt;
+</code></pre><p>Wrap the long loading snippet with a lift:LazyLoad snippet:</p><pre class="prettyprint lang-html"><code>&lt;span class=&quot;lift:LazyLoad&quot;&gt;
     &lt;span class=&quot;lift:TestSlowLoad&quot;&gt;&lt;/span&gt;
 &lt;/span&gt;</code></pre><div><p>Result:</p><div class="well"><span class="lift:LazyLoad"><span class="lift:TestSlowLoad"></span></span></div></div></section></div></div>
 

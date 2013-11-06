@@ -12,7 +12,7 @@
 
       
 
-      <div class="container"><div class="row"><section><h4>Generate Ajax Form with Snippet Example</h4><p>In some application scenerios, one need to generate Ajax form dynamically in response of user action, for eg, user accepted some chat invitation. In this case, we can use form.ajax callback to generate and send another ajax form to the browser, as demonstrated in this example.</p><p>Here is the form.ajax call back function that generate another ajax form:</p><pre><code>(register-cmd-proc-fn 
+      <div class="container"><div class="row"><section><h4>Generate Ajax Form with Snippet Example</h4><p>In some application scenerios, one need to generate Ajax form dynamically in response of user action, for eg, user accepted some chat invitation. In this case, we can use form.ajax callback to generate and send another ajax form to the browser, as demonstrated in this example.</p><p>Here is the form.ajax call back function that generate another ajax form:</p><pre class="prettyprint lang-clojure"><code>(register-cmd-proc-fn 
  &quot;ChatConfirm&quot;
  [context cmd]
  (let [chatform {:type :element :tag :form
@@ -31,7 +31,7 @@
                       :html htmltxt
                       }))
  )
-</code></pre><p>The corresponding HTML code:</p><pre><code>&lt;ul class=&quot;lift:comet?type=chat&quot;&gt;&lt;/ul&gt;
+</code></pre><p>The corresponding HTML code:</p><pre class="prettyprint lang-html"><code>&lt;ul class=&quot;lift:comet?type=chat&quot;&gt;&lt;/ul&gt;
 
 &lt;form class=&quot;input-group lift:form.ajax?callback=ChatConfirm&quot;&gt;
       &lt;input name=&quot;ppp&quot; type=&quot;hidden&quot; class=&quot;&quot;&gt;
