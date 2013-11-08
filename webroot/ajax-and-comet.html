@@ -50,7 +50,7 @@
  (prn &quot;chat channel is closed&quot;)
  (swap! chat-chans disj ch)
 )
-</code></pre><p>The corresponding HTML code:</p><pre class="prettyprint lang-html"><code>&lt;ul class=&quot;lift:comet?type=chat&quot;&gt;&lt;/ul&gt;
+</code></pre><p>The corresponding HTML code:</p><pre class="prettyprint lang-html"><code>&lt;ul class=&quot;lift:comet?type=chat&quot; id=&quot;msglist&quot;&gt;&lt;/ul&gt;
 
 &lt;form class=&quot;input-group lift:form.ajax?callback=ChatInput&quot;&gt;
       &lt;input name=&quot;chatmsg&quot; type=&quot;text&quot; class=&quot;form-control&quot;&gt;
