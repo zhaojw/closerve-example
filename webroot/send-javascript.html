@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head></head><body class="lift:content_id=main">
+
+    <div id="main" class="lift:surround?with=default;at=content">
+
+      
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Send Javascript to Client</title>
+
+      
+
+      <div class="container"><div class="row"><section><h4>Send Javascript to Client</h4><p>WIth Snippet code, we can send javascript code dynamically to browser to execute.</p><p>Let's use the form.ajax call back function to send a simple piece of js to browser:</p><pre class="prettyprint lang-clojure"><code>(register-cmd-proc-fn 
+ &quot;MakeAlert&quot;
+ [context cmd]
+ (send-cmd-to-page (:page-id context)
+                   {:act :globalEval
+                    :code &quot;alert('Alert from Server!');&quot;}))
+</code></pre><p>The corresponding HTML code:</p><pre class="prettyprint lang-html"><code>&lt;form class=&quot;input-group lift:form.ajax?callback=MakeAlert&quot;&gt;
+       &lt;input name=&quot;ppp&quot; type=&quot;hidden&quot; class=&quot;&quot;&gt;
+       &lt;span class=&quot;input-group-btn&quot;&gt;
+         &lt;input value=&quot;Send me an alert!&quot; class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;
+      &lt;/span&gt;
+&lt;/form&gt;</code></pre><div><p>Try it here:</p><div class="well"><span><form class="input-group lift:form.ajax?callback=MakeAlert">
+<input name="ppp" type="hidden" class="">
+      <span class="input-group-btn">
+        <input value="Send me an alert!" class="btn btn-default" type="submit">
+      </span>
+</form></span></div></div></section></div></div>
+
+
+      <!-- Example row of columns -->
+     
+
+  
+
+  
+</div></body></html>

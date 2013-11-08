@@ -68,6 +68,14 @@
                       }))
  )
 
+(register-cmd-proc-fn 
+ "MakeAlert"
+ [context cmd]
+ (send-cmd-to-page (:page-id context)
+                   {:act :globalEval
+                    :code "alert('Alert from Server!');"}))
+
+
 
 (add-watch chat-msgs :watch-chat-msgs
            (fn [key aref old-val new-val]
