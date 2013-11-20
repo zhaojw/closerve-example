@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head></head><body class="lift:content_id=main">
+
+    <div id="main" class="lift:surround?with=default;at=content">
+
+      
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Return JS cmd result to server</title>
+
+      
+
+      <div class="container"><div class="row"><section><h4>Return JS Cmd Result to Server Example</h4><p>Use query.ajax snippet to send a js cmd to browser, browser eval this js cmd, and send the result back to server. Server than
+invoke a call back function.</p><p>With this example callback function:</p><pre class="prettyprint lang-clojure"><code>(register-cmd-proc-fn 
+ &quot;EchoQuery&quot;
+ [context cmd]
+ (send-cmd-to-page (:page-id context)
+                     {:act :append
+                      :selector (str &quot;#msgww&quot; )
+                      :html (str &quot;Browser window width is &quot; cmd)
+                      })
+ )
+</code></pre><p>and the following HTML code, $(window).width() cmd will be send to browser, the server will then process the return with callback function</p><pre class="prettyprint lang-html"><code>&lt;span class=&quot;lift:query.ajax?callback=EchoQuery;code=%24(window).width()&quot;&gt;&lt;/span&gt;</code></pre><div><p>Result:</p><div class="well"><span id="msgww" class="lift:query.ajax?callback=EchoQuery;code=%24(window).width()"></span></div></div></section></div></div>
+
+
+      <!-- Example row of columns -->
+     
+
+  
+
+  
+</div></body></html>

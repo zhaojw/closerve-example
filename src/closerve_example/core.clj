@@ -99,6 +99,18 @@
  (swap! chat-chans disj ch)
 )
 
+
+(register-cmd-proc-fn 
+ "EchoQuery"
+ [context cmd]
+ (send-cmd-to-page (:page-id context)
+                     {:act :append
+                      :selector (str "#msgww" )
+                      :html (str "Browser window width is " cmd)
+                      })
+ )
+
+
 ;;;rest example
 
 (register-dyna-action 
