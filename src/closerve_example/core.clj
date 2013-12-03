@@ -121,7 +121,9 @@
 
 ;;;"no .html here"
 (reset! access-rules
-        [         
+        [
+         [#"^/\..*$" (fn [req] false)]
+         [#"^.*~$" (fn [req] false)]
          [#"^/templates-hidden.*$" (fn [req] false)]
          ])
 
