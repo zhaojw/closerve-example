@@ -33,9 +33,9 @@ git clone https://github.com/zhaojw/closerve.git
 
 Then compile and install it to your local mvn repo:
 
-```lein cljsbuild clean
+```lein clean
 
-lein compile
+lein cljsbuild once
 
 lein install```
 
